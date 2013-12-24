@@ -1,9 +1,10 @@
 Source: libxcb
 Priority: optional
 Section: libdevel
-Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Maintainer: Pexip AS <packaging@pexip.com>
+XSBC-Pexip-Original-Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
 XSBC-Original-Maintainer: XCB Developers <xcb@lists.freedesktop.org>
-Uploaders: Josh Triplett <josh@freedesktop.org>, Julien Danjou <acid@debian.org>, Cyril Brulebois <kibi@debian.org>
+XSBC-Pexip-Original-Uploaders: Josh Triplett <josh@freedesktop.org>, Julien Danjou <acid@debian.org>, Cyril Brulebois <kibi@debian.org>
 Build-Depends:
  libxau-dev (>= 1:1.0.5-2),
  libxdmcp-dev (>= 1:1.0.3-2),
@@ -28,6 +29,7 @@ Standards-Version: 3.9.2
 Homepage: http://xcb.freedesktop.org
 Vcs-Git: git://git.debian.org/git/collab-maint/libxcb
 Vcs-Browser: http://git.debian.org/?p=collab-maint/libxcb.git
+XS-Pexip-Upstream: http://archive.ubuntu.com/ubuntu/ precise
 
 Package: libxcb1
 Section: libs
