@@ -10,10 +10,14 @@ DEB_BUILDDIR = build
 
 override_dh_auto_configure:
 	autoreconf -vfi
-	dh_auto_configure --builddirectory=$(DEB_BUILDDIR)
+	dh_auto_configure --builddirectory=$(DEB_BUILDDIR) -- \
+		--disable-silent-rules
 
 %:
 	dh $@ --builddirectory=$(DEB_BUILDDIR)
+
+override_dh_auto_test:
+	dh_auto_test -- VERBOSE=1
 
 override_dh_strip:
 	set -e; \
@@ -23,7 +27,7 @@ override_dh_strip:
 	dh_strip -s --remaining-packages
 
 override_dh_makeshlibs:
-	dh_makeshlibs -plibxcb1 --add-udeb=libxcb1-udeb -V'libxcb1 (>= 1.10)' -- -c4
+	dh_makeshlibs -plibxcb1 --add-udeb=libxcb1-udeb -V'libxcb1 (>= 1.12)' -- -c4
 	dh_makeshlibs -Nlibxcb1 -V -- -c4
 
 override_dh_installdocs: debian/copyright.debian COPYING

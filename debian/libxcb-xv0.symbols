@@ -60,6 +60,9 @@ libxcb-xv.so.0 libxcb-xv0 #MINVER#
  xcb_xv_port_next@Base 0
  xcb_xv_put_image@Base 0
  xcb_xv_put_image_checked@Base 0
+ xcb_xv_put_image_data@Base 1.12
+ xcb_xv_put_image_data_end@Base 1.12
+ xcb_xv_put_image_data_length@Base 1.12
  xcb_xv_put_image_sizeof@Base 1.8
  xcb_xv_put_still@Base 0
  xcb_xv_put_still_checked@Base 0
