@@ -2,25 +2,23 @@ Source: libxcb
 Priority: optional
 Section: libdevel
 Maintainer: Pexip AS <packaging@pexip.com>
-XSBC-Pexip-Original-Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
-XSBC-Original-Maintainer: XCB Developers <xcb@lists.freedesktop.org>
-XSBC-Pexip-Original-Uploaders: Josh Triplett <josh@freedesktop.org>, Julien Danjou <acid@debian.org>, Cyril Brulebois <kibi@debian.org>
+XSBC-Pexip-Original-Maintainer: XCB Developers <xcb@lists.freedesktop.org>
+XSBC-Pexip-Original-Uploaders: Josh Triplett <josh@freedesktop.org>, Julien Danjou <acid@debian.org>
 Build-Depends:
  libxau-dev (>= 1:1.0.5-2),
  libxdmcp-dev (>= 1:1.0.3-2),
- xcb-proto (>= 1.7),
+ xcb-proto (>= 1.10),
  xcb-proto (<< 2.0),
  libpthread-stubs0-dev (>= 0.1),
  debhelper (>= 8.9.4~),
  pkg-config,
  xsltproc (>= 1.1.19),
  check (>= 0.9.4-2),
- python-xcbgen,
+ python-xcbgen (>= 1.10),
  libtool,
  automake,
  python,
- dctrl-tools,
- quilt
+ dctrl-tools
 Build-Depends-Indep:
 # libxcb-doc
  doxygen,
@@ -35,7 +33,9 @@ Package: libxcb1
 Section: libs
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
-Breaks: libxcb-xlib0
+Breaks:
+ libxcb-xlib0,
+ alsa-utils (<< 1.0.24.2-5),
 Pre-Depends: ${misc:Pre-Depends}
 Multi-Arch: same
 Description: X C Binding
@@ -151,7 +151,11 @@ Package: libxcb-composite0-dev
 Section: libdevel
 Architecture: any
 Multi-Arch: same
-Depends: ${misc:Depends}, libxcb-composite0 (= ${binary:Version}), libxcb1-dev, libxcb-xfixes0-dev
+Depends:
+ ${misc:Depends},
+ libxcb-composite0 (= ${binary:Version}),
+ libxcb1-dev,
+ libxcb-xfixes0-dev,
 Description: X C Binding, composite extension, development files
  This package contains the header and library files needed to build software
  using libxcb-composite, the composite extension for the X C Binding.
@@ -214,7 +218,11 @@ Package: libxcb-damage0-dev
 Section: libdevel
 Architecture: any
 Multi-Arch: same
-Depends: ${misc:Depends}, libxcb-damage0 (= ${binary:Version}), libxcb1-dev, libxcb-xfixes0-dev
+Depends:
+ ${misc:Depends},
+ libxcb-damage0 (= ${binary:Version}),
+ libxcb1-dev,
+ libxcb-xfixes0-dev,
 Description: X C Binding, damage extension, development files
  This package contains the header and library files needed to build software
  using libxcb-damage, the damage extension for the X C Binding.
@@ -403,7 +411,11 @@ Package: libxcb-randr0-dev
 Section: libdevel
 Architecture: any
 Multi-Arch: same
-Depends: ${misc:Depends}, libxcb-randr0 (= ${binary:Version}), libxcb1-dev, libxcb-render0-dev
+Depends:
+ ${misc:Depends},
+ libxcb-randr0 (= ${binary:Version}),
+ libxcb1-dev,
+ libxcb-render0-dev,
 Description: X C Binding, randr extension, development files
  This package contains the header and library files needed to build software
  using libxcb-randr, the randr extension for the X C Binding.
@@ -739,7 +751,7 @@ Priority: extra
 Section: debug
 Architecture: any
 Depends: ${misc:Depends}, libxcb-shape0 (= ${binary:Version})
-Multi-Arch: same 
+Multi-Arch: same
 Description: X C Binding, shape extension, debugging symbols
  This package contains the debugging symbols associated with
  libxcb-shape, the shape extension for the X C Binding.  gdb will
@@ -761,7 +773,7 @@ Section: libs
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Pre-Depends: ${misc:Pre-Depends}
-Multi-Arch: same 
+Multi-Arch: same
 Description: X C Binding, shm extension
  This package contains the library files needed to run software using
  libxcb-shm, the shm extension for the X C Binding.
@@ -802,7 +814,7 @@ Priority: extra
 Section: debug
 Architecture: any
 Depends: ${misc:Depends}, libxcb-shm0 (= ${binary:Version})
-Multi-Arch: same 
+Multi-Arch: same
 Description: X C Binding, shm extension, debugging symbols
  This package contains the debugging symbols associated with
  libxcb-shm, the shm extension for the X C Binding.  gdb will
@@ -819,12 +831,12 @@ Description: X C Binding, shm extension, debugging symbols
   * Easy creation of new extensions: automatically generates interface from
     machine-parsable protocol descriptions
 
-Package: libxcb-sync0
+Package: libxcb-sync1
 Section: libs
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Pre-Depends: ${misc:Pre-Depends}
-Multi-Arch: same 
+Multi-Arch: same
 Description: X C Binding, sync extension
  This package contains the library files needed to run software using
  libxcb-sync, the sync extension for the X C Binding.
@@ -840,11 +852,14 @@ Description: X C Binding, sync extension
   * Easy creation of new extensions: automatically generates interface from
     machine-parsable protocol descriptions
 
-Package: libxcb-sync0-dev
+Package: libxcb-sync-dev
 Section: libdevel
 Architecture: any
 Multi-Arch: same
-Depends: ${misc:Depends}, libxcb-sync0 (= ${binary:Version}), libxcb1-dev
+Provides: libxcb-sync0-dev
+Conflicts: libxcb-sync0-dev
+Replaces: libxcb-sync0-dev
+Depends: ${misc:Depends}, libxcb-sync1 (= ${binary:Version}), libxcb1-dev
 Description: X C Binding, sync extension, development files
  This package contains the header and library files needed to build software
  using libxcb-sync, the sync extension for the X C Binding.
@@ -860,12 +875,12 @@ Description: X C Binding, sync extension, development files
   * Easy creation of new extensions: automatically generates interface from
     machine-parsable protocol descriptions
 
-Package: libxcb-sync0-dbg
+Package: libxcb-sync1-dbg
 Priority: extra
 Section: debug
 Architecture: any
-Depends: ${misc:Depends}, libxcb-sync0 (= ${binary:Version})
-Multi-Arch: same 
+Depends: ${misc:Depends}, libxcb-sync1 (= ${binary:Version})
+Multi-Arch: same
 Description: X C Binding, sync extension, debugging symbols
  This package contains the debugging symbols associated with
  libxcb-sync, the sync extension for the X C Binding.  gdb will
@@ -887,7 +902,7 @@ Section: libs
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Pre-Depends: ${misc:Pre-Depends}
-Multi-Arch: same 
+Multi-Arch: same
 Description: X C Binding, xevie extension
  This package contains the library files needed to run software using
  libxcb-xevie, the xevie extension for the X C Binding.
@@ -928,7 +943,7 @@ Priority: extra
 Section: debug
 Architecture: any
 Depends: ${misc:Depends}, libxcb-xevie0 (= ${binary:Version})
-Multi-Arch: same 
+Multi-Arch: same
 Description: X C Binding, xevie extension, debugging symbols
  This package contains the debugging symbols associated with
  libxcb-xevie, the xevie extension for the X C Binding.  gdb will
@@ -950,7 +965,7 @@ Section: libs
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Pre-Depends: ${misc:Pre-Depends}
-Multi-Arch: same 
+Multi-Arch: same
 Description: X C Binding, xf86dri extension
  This package contains the library files needed to run software using
  libxcb-xf86dri, the xf86dri extension for the X C Binding.
@@ -991,7 +1006,7 @@ Priority: extra
 Section: debug
 Architecture: any
 Depends: ${misc:Depends}, libxcb-xf86dri0 (= ${binary:Version})
-Multi-Arch: same 
+Multi-Arch: same
 Description: X C Binding, xf86dri extension, debugging symbols
  This package contains the debugging symbols associated with
  libxcb-xf86dri, the xf86dri extension for the X C Binding.  gdb will
@@ -1013,7 +1028,7 @@ Section: libs
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Pre-Depends: ${misc:Pre-Depends}
-Multi-Arch: same 
+Multi-Arch: same
 Description: X C Binding, xfixes extension
  This package contains the library files needed to run software using
  libxcb-xfixes, the xfixes extension for the X C Binding.
@@ -1033,7 +1048,12 @@ Package: libxcb-xfixes0-dev
 Section: libdevel
 Architecture: any
 Multi-Arch: same
-Depends: ${misc:Depends}, libxcb-xfixes0 (= ${binary:Version}), libxcb1-dev, libxcb-render0-dev, libxcb-shape0-dev
+Depends:
+ ${misc:Depends},
+ libxcb-xfixes0 (= ${binary:Version}),
+ libxcb1-dev,
+ libxcb-render0-dev,
+ libxcb-shape0-dev,
 Description: X C Binding, xfixes extension, development files
  This package contains the header and library files needed to build software
  using libxcb-xfixes, the xfixes extension for the X C Binding.
@@ -1054,7 +1074,7 @@ Priority: extra
 Section: debug
 Architecture: any
 Depends: ${misc:Depends}, libxcb-xfixes0 (= ${binary:Version})
-Multi-Arch: same 
+Multi-Arch: same
 Description: X C Binding, xfixes extension, debugging symbols
  This package contains the debugging symbols associated with
  libxcb-xfixes, the xfixes extension for the X C Binding.  gdb will
@@ -1076,7 +1096,7 @@ Section: libs
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Pre-Depends: ${misc:Pre-Depends}
-Multi-Arch: same 
+Multi-Arch: same
 Description: X C Binding, xinerama extension
  This package contains the library files needed to run software using
  libxcb-xinerama, the xinerama extension for the X C Binding.
@@ -1117,7 +1137,7 @@ Priority: extra
 Section: debug
 Architecture: any
 Depends: ${misc:Depends}, libxcb-xinerama0 (= ${binary:Version})
-Multi-Arch: same 
+Multi-Arch: same
 Description: X C Binding, xinerama extension, debugging symbols
  This package contains the debugging symbols associated with
  libxcb-xinerama, the xinerama extension for the X C Binding.  gdb will
@@ -1139,7 +1159,7 @@ Section: libs
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Pre-Depends: ${misc:Pre-Depends}
-Multi-Arch: same 
+Multi-Arch: same
 Description: X C Binding, xprint extension
  This package contains the library files needed to run software using
  libxcb-xprint, the xprint extension for the X C Binding.
@@ -1180,7 +1200,7 @@ Priority: extra
 Section: debug
 Architecture: any
 Depends: ${misc:Depends}, libxcb-xprint0 (= ${binary:Version})
-Multi-Arch: same 
+Multi-Arch: same
 Description: X C Binding, xprint extension, debugging symbols
  This package contains the debugging symbols associated with
  libxcb-xprint, the xprint extension for the X C Binding.  gdb will
@@ -1202,7 +1222,7 @@ Section: libs
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Pre-Depends: ${misc:Pre-Depends}
-Multi-Arch: same 
+Multi-Arch: same
 Description: X C Binding, xtest extension
  This package contains the library files needed to run software using
  libxcb-xtest, the xtest extension for the X C Binding.
@@ -1243,7 +1263,7 @@ Priority: extra
 Section: debug
 Architecture: any
 Depends: ${misc:Depends}, libxcb-xtest0 (= ${binary:Version})
-Multi-Arch: same 
+Multi-Arch: same
 Description: X C Binding, xtest extension, debugging symbols
  This package contains the debugging symbols associated with
  libxcb-xtest, the xtest extension for the X C Binding.  gdb will
@@ -1265,7 +1285,7 @@ Section: libs
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Pre-Depends: ${misc:Pre-Depends}
-Multi-Arch: same 
+Multi-Arch: same
 Description: X C Binding, xv extension
  This package contains the library files needed to run software using
  libxcb-xv, the xv extension for the X C Binding.
@@ -1285,7 +1305,11 @@ Package: libxcb-xv0-dev
 Section: libdevel
 Architecture: any
 Multi-Arch: same
-Depends: ${misc:Depends}, libxcb-xv0 (= ${binary:Version}), libxcb1-dev, libxcb-shm0-dev
+Depends:
+ ${misc:Depends},
+ libxcb-xv0 (= ${binary:Version}),
+ libxcb1-dev,
+ libxcb-shm0-dev,
 Description: X C Binding, xv extension, development files
  This package contains the header and library files needed to build software
  using libxcb-xv, the xv extension for the X C Binding.
@@ -1306,7 +1330,7 @@ Priority: extra
 Section: debug
 Architecture: any
 Depends: ${misc:Depends}, libxcb-xv0 (= ${binary:Version})
-Multi-Arch: same 
+Multi-Arch: same
 Description: X C Binding, xv extension, debugging symbols
  This package contains the debugging symbols associated with
  libxcb-xv, the xv extension for the X C Binding.  gdb will
@@ -1328,7 +1352,7 @@ Section: libs
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Pre-Depends: ${misc:Pre-Depends}
-Multi-Arch: same 
+Multi-Arch: same
 Description: X C Binding, xvmc extension
  This package contains the library files needed to run software using
  libxcb-xvmc, the xvmc extension for the X C Binding.
@@ -1348,7 +1372,11 @@ Package: libxcb-xvmc0-dev
 Section: libdevel
 Architecture: any
 Multi-Arch: same
-Depends: ${misc:Depends}, libxcb-xvmc0 (= ${binary:Version}), libxcb1-dev, libxcb-xv0-dev
+Depends:
+ ${misc:Depends},
+ libxcb-xvmc0 (= ${binary:Version}),
+ libxcb1-dev,
+ libxcb-xv0-dev,
 Description: X C Binding, xvmc extension, development files
  This package contains the header and library files needed to build software
  using libxcb-xvmc, the xvmc extension for the X C Binding.
@@ -1369,7 +1397,7 @@ Priority: extra
 Section: debug
 Architecture: any
 Depends: ${misc:Depends}, libxcb-xvmc0 (= ${binary:Version})
-Multi-Arch: same 
+Multi-Arch: same
 Description: X C Binding, xvmc extension, debugging symbols
  This package contains the debugging symbols associated with
  libxcb-xvmc, the xvmc extension for the X C Binding.  gdb will
@@ -1391,7 +1419,7 @@ Section: libs
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
 Pre-Depends: ${misc:Pre-Depends}
-Multi-Arch: same 
+Multi-Arch: same
 Description: X C Binding, dri2 extension
  This package contains the library files needed to run software using
  libxcb-dri2, the dri2 extension for the X C Binding.
@@ -1432,11 +1460,206 @@ Priority: extra
 Section: debug
 Architecture: any
 Depends: ${misc:Depends}, libxcb-dri2-0 (= ${binary:Version})
-Multi-Arch: same 
+Multi-Arch: same
 Description: X C Binding, dri2 extension, debugging symbols
  This package contains the debugging symbols associated with
  libxcb-dri2, the dri2 extension for the X C Binding.  gdb will
  automatically use these symbols when debugging libxcb-dri2.
+ .
+ The XCB library provides an interface to the X Window System protocol,
+ designed to replace the Xlib interface.  XCB provides several advantages over
+ Xlib:
+ .
+  * Size: small library and lower memory footprint
+  * Latency hiding: batch several requests and wait for the replies later
+  * Direct protocol access: one-to-one mapping between interface and protocol
+  * Thread support: access XCB from multiple threads, with no explicit locking
+  * Easy creation of new extensions: automatically generates interface from
+    machine-parsable protocol descriptions
+
+Package: libxcb-present0
+Section: libs
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Pre-Depends: ${misc:Pre-Depends}
+Multi-Arch: same
+Description: X C Binding, present extension
+ This package contains the library files needed to run software using
+ libxcb-present, the present extension for the X C Binding.
+ .
+ The XCB library provides an interface to the X Window System protocol,
+ designed to replace the Xlib interface.  XCB provides several advantages over
+ Xlib:
+ .
+  * Size: small library and lower memory footprint
+  * Latency hiding: batch several requests and wait for the replies later
+  * Direct protocol access: one-to-one mapping between interface and protocol
+  * Thread support: access XCB from multiple threads, with no explicit locking
+  * Easy creation of new extensions: automatically generates interface from
+    machine-parsable protocol descriptions
+
+Package: libxcb-present-dev
+Section: libdevel
+Architecture: any
+Multi-Arch: same
+Depends:
+ ${misc:Depends},
+ libxcb-present0 (= ${binary:Version}),
+ libxcb1-dev,
+ libxcb-randr0-dev,
+ libxcb-xfixes0-dev,
+ libxcb-sync-dev,
+Description: X C Binding, present extension, development files
+ This package contains the header and library files needed to build software
+ using libxcb-present, the present extension for the X C Binding.
+ .
+ The XCB library provides an interface to the X Window System protocol,
+ designed to replace the Xlib interface.  XCB provides several advantages over
+ Xlib:
+ .
+  * Size: small library and lower memory footprint
+  * Latency hiding: batch several requests and wait for the replies later
+  * Direct protocol access: one-to-one mapping between interface and protocol
+  * Thread support: access XCB from multiple threads, with no explicit locking
+  * Easy creation of new extensions: automatically generates interface from
+    machine-parsable protocol descriptions
+
+Package: libxcb-present0-dbg
+Priority: extra
+Section: debug
+Architecture: any
+Depends: ${misc:Depends}, libxcb-present0 (= ${binary:Version})
+Multi-Arch: same
+Description: X C Binding, present extension, debugging symbols
+ This package contains the debugging symbols associated with
+ libxcb-present, the present extension for the X C Binding.  gdb will
+ automatically use these symbols when debugging libxcb-present.
+ .
+ The XCB library provides an interface to the X Window System protocol,
+ designed to replace the Xlib interface.  XCB provides several advantages over
+ Xlib:
+ .
+  * Size: small library and lower memory footprint
+  * Latency hiding: batch several requests and wait for the replies later
+  * Direct protocol access: one-to-one mapping between interface and protocol
+  * Thread support: access XCB from multiple threads, with no explicit locking
+  * Easy creation of new extensions: automatically generates interface from
+    machine-parsable protocol descriptions
+
+Package: libxcb-dri3-0
+Section: libs
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Pre-Depends: ${misc:Pre-Depends}
+Multi-Arch: same
+Description: X C Binding, dri3 extension
+ This package contains the library files needed to run software using
+ libxcb-dri3, the dri3 extension for the X C Binding.
+ .
+ The XCB library provides an interface to the X Window System protocol,
+ designed to replace the Xlib interface.  XCB provides several advantages over
+ Xlib:
+ .
+  * Size: small library and lower memory footprint
+  * Latency hiding: batch several requests and wait for the replies later
+  * Direct protocol access: one-to-one mapping between interface and protocol
+  * Thread support: access XCB from multiple threads, with no explicit locking
+  * Easy creation of new extensions: automatically generates interface from
+    machine-parsable protocol descriptions
+
+Package: libxcb-dri3-dev
+Section: libdevel
+Architecture: any
+Multi-Arch: same
+Depends: ${misc:Depends}, libxcb-dri3-0 (= ${binary:Version}), libxcb1-dev
+Description: X C Binding, dri3 extension, development files
+ This package contains the header and library files needed to build software
+ using libxcb-dri3, the dri3 extension for the X C Binding.
+ .
+ The XCB library provides an interface to the X Window System protocol,
+ designed to replace the Xlib interface.  XCB provides several advantages over
+ Xlib:
+ .
+  * Size: small library and lower memory footprint
+  * Latency hiding: batch several requests and wait for the replies later
+  * Direct protocol access: one-to-one mapping between interface and protocol
+  * Thread support: access XCB from multiple threads, with no explicit locking
+  * Easy creation of new extensions: automatically generates interface from
+    machine-parsable protocol descriptions
+
+Package: libxcb-dri3-0-dbg
+Priority: extra
+Section: debug
+Architecture: any
+Depends: ${misc:Depends}, libxcb-dri3-0 (= ${binary:Version})
+Multi-Arch: same
+Description: X C Binding, dri3 extension, debugging symbols
+ This package contains the debugging symbols associated with
+ libxcb-dri3, the dri3 extension for the X C Binding.  gdb will
+ automatically use these symbols when debugging libxcb-dri3.
+ .
+ The XCB library provides an interface to the X Window System protocol,
+ designed to replace the Xlib interface.  XCB provides several advantages over
+ Xlib:
+ .
+  * Size: small library and lower memory footprint
+  * Latency hiding: batch several requests and wait for the replies later
+  * Direct protocol access: one-to-one mapping between interface and protocol
+  * Thread support: access XCB from multiple threads, with no explicit locking
+  * Easy creation of new extensions: automatically generates interface from
+    machine-parsable protocol descriptions
+
+Package: libxcb-xkb1
+Section: libs
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Pre-Depends: ${misc:Pre-Depends}
+Multi-Arch: same
+Description: X C Binding, XKEYBOARD extension
+ This package contains the library files needed to run software using
+ libxcb-xkb, the XKEYBOARD extension for the X C Binding.
+ .
+ The XCB library provides an interface to the X Window System protocol,
+ designed to replace the Xlib interface.  XCB provides several advantages over
+ Xlib:
+ .
+  * Size: small library and lower memory footprint
+  * Latency hiding: batch several requests and wait for the replies later
+  * Direct protocol access: one-to-one mapping between interface and protocol
+  * Thread support: access XCB from multiple threads, with no explicit locking
+  * Easy creation of new extensions: automatically generates interface from
+    machine-parsable protocol descriptions
+
+Package: libxcb-xkb-dev
+Section: libdevel
+Architecture: any
+Multi-Arch: same
+Depends: ${misc:Depends}, libxcb-xkb1 (= ${binary:Version}), libxcb1-dev
+Description: X C Binding, XKEYBOARD extension, development files
+ This package contains the header and library files needed to build software
+ using libxcb-xkb, the XKEYBOARD extension for the X C Binding.
+ .
+ The XCB library provides an interface to the X Window System protocol,
+ designed to replace the Xlib interface.  XCB provides several advantages over
+ Xlib:
+ .
+  * Size: small library and lower memory footprint
+  * Latency hiding: batch several requests and wait for the replies later
+  * Direct protocol access: one-to-one mapping between interface and protocol
+  * Thread support: access XCB from multiple threads, with no explicit locking
+  * Easy creation of new extensions: automatically generates interface from
+    machine-parsable protocol descriptions
+
+Package: libxcb-xkb1-dbg
+Priority: extra
+Section: debug
+Architecture: any
+Depends: ${misc:Depends}, libxcb-xkb1 (= ${binary:Version})
+Multi-Arch: same
+Description: X C Binding, XKEYBOARD extension, debugging symbols
+ This package contains the debugging symbols associated with
+ libxcb-xkb, the XKEYBOARD extension for the X C Binding.  gdb will
+ automatically use these symbols when debugging libxcb-xkb.
  .
  The XCB library provides an interface to the X Window System protocol,
  designed to replace the Xlib interface.  XCB provides several advantages over
