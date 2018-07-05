@@ -27,7 +27,7 @@ Standards-Version: 3.9.2
 Homepage: http://xcb.freedesktop.org
 Vcs-Git: git://git.debian.org/git/collab-maint/libxcb
 Vcs-Browser: http://git.debian.org/?p=collab-maint/libxcb.git
-XS-Pexip-Upstream: http://ftp.debian.org/debian/ jessie
+XS-Pexip-Upstream: http://ftp.debian.org/debian/ stretch
 
 Package: libxcb1
 Section: libs
