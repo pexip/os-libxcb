@@ -36,9 +36,6 @@
 #include <stdio.h>
 #include <errno.h>
 
-#include "xcb.h"
-#include "xcbext.h"
-#include "xcbint.h"
 #if USE_POLL
 #include <poll.h>
 #endif
@@ -50,6 +47,10 @@
 #ifdef _WIN32
 #include "xcb_windefs.h"
 #endif /* _WIN32 */
+
+#include "xcb.h"
+#include "xcbext.h"
+#include "xcbint.h"
 
 #define XCB_ERROR 0
 #define XCB_REPLY 1
@@ -95,6 +96,11 @@ typedef struct reader_list {
     pthread_cond_t *data;
     struct reader_list *next;
 } reader_list;
+
+typedef struct special_list {
+    xcb_special_event_t *se;
+    struct special_list *next;
+} special_list;
 
 static void remove_finished_readers(reader_list **prev_reader, uint64_t completed)
 {
@@ -200,9 +206,9 @@ static int read_packet(xcb_connection_t *c)
             c->in.request_completed = c->in.request_read - 1;
         }
 
-        while(c->in.pending_replies && 
+        while(c->in.pending_replies &&
               c->in.pending_replies->workaround != WORKAROUND_EXTERNAL_SOCKET_OWNER &&
-	      XCB_SEQUENCE_COMPARE (c->in.pending_replies->last_request, <=, c->in.request_completed))
+              XCB_SEQUENCE_COMPARE (c->in.pending_replies->last_request, <=, c->in.request_completed))
         {
             pending_reply *oldpend = c->in.pending_replies;
             c->in.pending_replies = oldpend->next;
@@ -386,11 +392,11 @@ static int read_block(const int fd, void *buf, const ssize_t len)
             FD_ZERO(&fds);
             FD_SET(fd, &fds);
 
-	    /* Initializing errno here makes sure that for Win32 this loop will execute only once */
-	    errno = 0;  
-	    do {
-		ret = select(fd + 1, &fds, 0, 0, 0);
-	    } while (ret == -1 && errno == EINTR);
+            /* Initializing errno here makes sure that for Win32 this loop will execute only once */
+            errno = 0;
+            do {
+                ret = select(fd + 1, &fds, 0, 0, 0);
+            } while (ret == -1 && errno == EINTR);
 #endif /* USE_POLL */
         }
         if(ret <= 0)
@@ -474,6 +480,26 @@ static void remove_reader(reader_list **prev_reader, reader_list *reader)
         }
 }
 
+static void insert_special(special_list **prev_special, special_list *special, xcb_special_event_t *se)
+{
+    special->se = se;
+    special->next = *prev_special;
+    *prev_special = special;
+}
+
+static void remove_special(special_list **prev_special, special_list *special)
+{
+    while(*prev_special)
+    {
+        if(*prev_special == special)
+        {
+            *prev_special = (*prev_special)->next;
+            break;
+        }
+        prev_special = &(*prev_special)->next;
+    }
+}
+
 static void *wait_for_reply(xcb_connection_t *c, uint64_t request, xcb_generic_error_t **e)
 {
     void *ret = 0;
@@ -518,6 +544,20 @@ void *xcb_wait_for_reply(xcb_connection_t *c, unsigned int request, xcb_generic_
 
     pthread_mutex_lock(&c->iolock);
     ret = wait_for_reply(c, widen(c, request), e);
+    pthread_mutex_unlock(&c->iolock);
+    return ret;
+}
+
+void *xcb_wait_for_reply64(xcb_connection_t *c, uint64_t request, xcb_generic_error_t **e)
+{
+    void *ret;
+    if(e)
+        *e = 0;
+    if(c->has_error)
+        return 0;
+
+    pthread_mutex_lock(&c->iolock);
+    ret = wait_for_reply(c, request, e);
     pthread_mutex_unlock(&c->iolock);
     return ret;
 }
@@ -594,6 +634,20 @@ void xcb_discard_reply(xcb_connection_t *c, unsigned int sequence)
     pthread_mutex_unlock(&c->iolock);
 }
 
+void xcb_discard_reply64(xcb_connection_t *c, uint64_t sequence)
+{
+    if(c->has_error)
+        return;
+
+    /* If an error occurred when issuing the request, fail immediately. */
+    if(!sequence)
+        return;
+
+    pthread_mutex_lock(&c->iolock);
+    discard_reply(c, sequence);
+    pthread_mutex_unlock(&c->iolock);
+}
+
 int xcb_poll_for_reply(xcb_connection_t *c, unsigned int request, void **reply, xcb_generic_error_t **error)
 {
     int ret;
@@ -607,6 +661,23 @@ int xcb_poll_for_reply(xcb_connection_t *c, unsigned int request, void **reply, 
     assert(reply != 0);
     pthread_mutex_lock(&c->iolock);
     ret = poll_for_reply(c, widen(c, request), reply, error);
+    pthread_mutex_unlock(&c->iolock);
+    return ret;
+}
+
+int xcb_poll_for_reply64(xcb_connection_t *c, uint64_t request, void **reply, xcb_generic_error_t **error)
+{
+    int ret;
+    if(c->has_error)
+    {
+        *reply = 0;
+        if(error)
+            *error = 0;
+        return 1; /* would not block */
+    }
+    assert(reply != 0);
+    pthread_mutex_lock(&c->iolock);
+    ret = poll_for_reply(c, request, reply, error);
     pthread_mutex_unlock(&c->iolock);
     return ret;
 }
@@ -704,17 +775,23 @@ xcb_generic_event_t *xcb_poll_for_special_event(xcb_connection_t *c,
 xcb_generic_event_t *xcb_wait_for_special_event(xcb_connection_t *c,
                                                 xcb_special_event_t *se)
 {
+    special_list special;
     xcb_generic_event_t *event;
 
     if(c->has_error)
         return 0;
     pthread_mutex_lock(&c->iolock);
 
+    insert_special(&c->in.special_waiters, &special, se);
+
     /* get_special_event returns 0 on empty list. */
     while(!(event = get_special_event(c, se)))
         if(!_xcb_conn_wait(c, &se->special_event_cond, 0, 0))
             break;
 
+    remove_special(&c->in.special_waiters, &special);
+
+    _xcb_in_wake_up_next_reader(c);
     pthread_mutex_unlock(&c->iolock);
     return event;
 }
@@ -746,7 +823,7 @@ xcb_register_for_special_xge(xcb_connection_t *c,
         pthread_mutex_unlock(&c->iolock);
         return NULL;
     }
-            
+
     se->extension = ext_reply->major_opcode;
     se->eid = eid;
 
@@ -842,6 +919,8 @@ void _xcb_in_wake_up_next_reader(xcb_connection_t *c)
     int pthreadret;
     if(c->in.readers)
         pthreadret = pthread_cond_signal(c->in.readers->data);
+    else if(c->in.special_waiters)
+        pthreadret = pthread_cond_signal(&c->in.special_waiters->se->special_event_cond);
     else
         pthreadret = pthread_cond_signal(&c->in.event_cond);
     assert(pthreadret == 0);
