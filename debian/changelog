@@ -1,3 +1,9 @@
+libxcb (1.12-1pexip1) pexip; urgency=medium
+
+  * Migrate to Stretch
+
+ -- John-Mark Bell <jmb@pexip.com>  Tue, 10 Jul 2018 11:24:32 +0000
+
 libxcb (1.12-1) unstable; urgency=medium
 
   * New upstream release (closes: #830491).
