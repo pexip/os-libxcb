@@ -3,16 +3,28 @@ libxcb-randr.so.0 libxcb-randr0 #MINVER#
  xcb_randr_add_output_mode_checked@Base 1.1
  xcb_randr_change_output_property@Base 1.1
  xcb_randr_change_output_property_checked@Base 1.1
+ xcb_randr_change_output_property_data@Base 1.12
+ xcb_randr_change_output_property_data_end@Base 1.12
+ xcb_randr_change_output_property_data_length@Base 1.12
  xcb_randr_change_output_property_sizeof@Base 1.8
  xcb_randr_change_provider_property@Base 1.10
  xcb_randr_change_provider_property_checked@Base 1.10
+ xcb_randr_change_provider_property_data@Base 1.12
+ xcb_randr_change_provider_property_data_end@Base 1.12
+ xcb_randr_change_provider_property_data_length@Base 1.12
  xcb_randr_change_provider_property_sizeof@Base 1.10
  xcb_randr_configure_output_property@Base 1.1
  xcb_randr_configure_output_property_checked@Base 1.1
  xcb_randr_configure_output_property_sizeof@Base 1.8
+ xcb_randr_configure_output_property_values@Base 1.12
+ xcb_randr_configure_output_property_values_end@Base 1.12
+ xcb_randr_configure_output_property_values_length@Base 1.12
  xcb_randr_configure_provider_property@Base 1.10
  xcb_randr_configure_provider_property_checked@Base 1.10
  xcb_randr_configure_provider_property_sizeof@Base 1.10
+ xcb_randr_configure_provider_property_values@Base 1.12
+ xcb_randr_configure_provider_property_values_end@Base 1.12
+ xcb_randr_configure_provider_property_values_length@Base 1.12
  xcb_randr_create_mode@Base 1.1
  xcb_randr_create_mode_reply@Base 1.1
  xcb_randr_create_mode_sizeof@Base 1.8
@@ -21,6 +33,8 @@ libxcb-randr.so.0 libxcb-randr0 #MINVER#
  xcb_randr_crtc_change_next@Base 1.1
  xcb_randr_crtc_end@Base 1.2
  xcb_randr_crtc_next@Base 1.2
+ xcb_randr_delete_monitor@Base 1.12
+ xcb_randr_delete_monitor_checked@Base 1.12
  xcb_randr_delete_output_mode@Base 1.1
  xcb_randr_delete_output_mode_checked@Base 1.1
  xcb_randr_delete_output_property@Base 1.1
@@ -71,6 +85,12 @@ libxcb-randr.so.0 libxcb-randr0 #MINVER#
  xcb_randr_get_crtc_transform_reply@Base 1.3
  xcb_randr_get_crtc_transform_sizeof@Base 1.8
  xcb_randr_get_crtc_transform_unchecked@Base 1.3
+ xcb_randr_get_monitors@Base 1.12
+ xcb_randr_get_monitors_monitors_iterator@Base 1.12
+ xcb_randr_get_monitors_monitors_length@Base 1.12
+ xcb_randr_get_monitors_reply@Base 1.12
+ xcb_randr_get_monitors_sizeof@Base 1.12
+ xcb_randr_get_monitors_unchecked@Base 1.12
  xcb_randr_get_output_info@Base 1.1
  xcb_randr_get_output_info_clones@Base 1.1
  xcb_randr_get_output_info_clones_end@Base 1.1
@@ -196,6 +216,12 @@ libxcb-randr.so.0 libxcb-randr0 #MINVER#
  xcb_randr_mode_info_end@Base 1.1
  xcb_randr_mode_info_next@Base 1.1
  xcb_randr_mode_next@Base 1.2
+ xcb_randr_monitor_info_end@Base 1.12
+ xcb_randr_monitor_info_next@Base 1.12
+ xcb_randr_monitor_info_outputs@Base 1.12
+ xcb_randr_monitor_info_outputs_end@Base 1.12
+ xcb_randr_monitor_info_outputs_length@Base 1.12
+ xcb_randr_monitor_info_sizeof@Base 1.12
  xcb_randr_notify_data_end@Base 1.1
  xcb_randr_notify_data_next@Base 1.1
  xcb_randr_output_change_end@Base 1.1
@@ -244,11 +270,30 @@ libxcb-randr.so.0 libxcb-randr0 #MINVER#
  xcb_randr_set_crtc_config_sizeof@Base 1.8
  xcb_randr_set_crtc_config_unchecked@Base 1.1
  xcb_randr_set_crtc_gamma@Base 1.1
+ xcb_randr_set_crtc_gamma_blue@Base 1.12
+ xcb_randr_set_crtc_gamma_blue_end@Base 1.12
+ xcb_randr_set_crtc_gamma_blue_length@Base 1.12
  xcb_randr_set_crtc_gamma_checked@Base 1.1
+ xcb_randr_set_crtc_gamma_green@Base 1.12
+ xcb_randr_set_crtc_gamma_green_end@Base 1.12
+ xcb_randr_set_crtc_gamma_green_length@Base 1.12
+ xcb_randr_set_crtc_gamma_red@Base 1.12
+ xcb_randr_set_crtc_gamma_red_end@Base 1.12
+ xcb_randr_set_crtc_gamma_red_length@Base 1.12
  xcb_randr_set_crtc_gamma_sizeof@Base 1.8
  xcb_randr_set_crtc_transform@Base 1.3
  xcb_randr_set_crtc_transform_checked@Base 1.3
+ xcb_randr_set_crtc_transform_filter_name@Base 1.12
+ xcb_randr_set_crtc_transform_filter_name_end@Base 1.12
+ xcb_randr_set_crtc_transform_filter_name_length@Base 1.12
+ xcb_randr_set_crtc_transform_filter_params@Base 1.12
+ xcb_randr_set_crtc_transform_filter_params_end@Base 1.12
+ xcb_randr_set_crtc_transform_filter_params_length@Base 1.12
  xcb_randr_set_crtc_transform_sizeof@Base 1.8
+ xcb_randr_set_monitor@Base 1.12
+ xcb_randr_set_monitor_checked@Base 1.12
+ xcb_randr_set_monitor_monitorinfo@Base 1.12
+ xcb_randr_set_monitor_sizeof@Base 1.12
  xcb_randr_set_output_primary@Base 1.3
  xcb_randr_set_output_primary_checked@Base 1.3
  xcb_randr_set_panning@Base 1.3

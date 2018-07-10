@@ -142,6 +142,7 @@ libxcb-xkb.so.1 libxcb-xkb1 #MINVER#
  xcb_xkb_get_kbd_by_name_replies_types_map_vmods_rtrn_length@Base 0
  xcb_xkb_get_kbd_by_name_replies_unpack@Base 0
  xcb_xkb_get_kbd_by_name_reply@Base 0
+ xcb_xkb_get_kbd_by_name_sizeof@Base 1.12
  xcb_xkb_get_kbd_by_name_unchecked@Base 0
  xcb_xkb_get_map@Base 0
  xcb_xkb_get_map_map@Base 0
@@ -151,18 +152,6 @@ libxcb-xkb.so.1 libxcb-xkb1 #MINVER#
  xcb_xkb_get_map_map_acts_rtrn_count@Base 0
  xcb_xkb_get_map_map_acts_rtrn_count_end@Base 0
  xcb_xkb_get_map_map_acts_rtrn_count_length@Base 0
- xcb_xkb_get_map_map_alignment_pad@Base 0
- xcb_xkb_get_map_map_alignment_pad_2@Base 0
- xcb_xkb_get_map_map_alignment_pad_2_end@Base 0
- xcb_xkb_get_map_map_alignment_pad_2_length@Base 0
- xcb_xkb_get_map_map_alignment_pad_3@Base 0
- xcb_xkb_get_map_map_alignment_pad_3_end@Base 0
- xcb_xkb_get_map_map_alignment_pad_3_length@Base 0
- xcb_xkb_get_map_map_alignment_pad_4@Base 0
- xcb_xkb_get_map_map_alignment_pad_4_end@Base 0
- xcb_xkb_get_map_map_alignment_pad_4_length@Base 0
- xcb_xkb_get_map_map_alignment_pad_end@Base 0
- xcb_xkb_get_map_map_alignment_pad_length@Base 0
  xcb_xkb_get_map_map_behaviors_rtrn@Base 0
  xcb_xkb_get_map_map_behaviors_rtrn_iterator@Base 0
  xcb_xkb_get_map_map_behaviors_rtrn_length@Base 0
@@ -186,17 +175,16 @@ libxcb-xkb.so.1 libxcb-xkb1 #MINVER#
  xcb_xkb_get_map_map_vmods_rtrn_end@Base 0
  xcb_xkb_get_map_map_vmods_rtrn_length@Base 0
  xcb_xkb_get_map_reply@Base 0
+ xcb_xkb_get_map_sizeof@Base 1.12
  xcb_xkb_get_map_unchecked@Base 0
  xcb_xkb_get_named_indicator@Base 0
  xcb_xkb_get_named_indicator_reply@Base 0
  xcb_xkb_get_named_indicator_unchecked@Base 0
  xcb_xkb_get_names@Base 0
  xcb_xkb_get_names_reply@Base 0
+ xcb_xkb_get_names_sizeof@Base 1.12
  xcb_xkb_get_names_unchecked@Base 0
  xcb_xkb_get_names_value_list@Base 0
- xcb_xkb_get_names_value_list_alignment_pad@Base 0
- xcb_xkb_get_names_value_list_alignment_pad_end@Base 0
- xcb_xkb_get_names_value_list_alignment_pad_length@Base 0
  xcb_xkb_get_names_value_list_groups@Base 0
  xcb_xkb_get_names_value_list_groups_end@Base 0
  xcb_xkb_get_names_value_list_groups_length@Base 0
@@ -378,13 +366,21 @@ libxcb-xkb.so.1 libxcb-xkb1 #MINVER#
  xcb_xkb_select_events_aux@Base 0
  xcb_xkb_select_events_aux_checked@Base 0
  xcb_xkb_select_events_checked@Base 0
+ xcb_xkb_select_events_details@Base 1.12
  xcb_xkb_select_events_details_serialize@Base 0
  xcb_xkb_select_events_details_sizeof@Base 0
  xcb_xkb_select_events_details_unpack@Base 0
+ xcb_xkb_select_events_sizeof@Base 1.12
  xcb_xkb_set_behavior_end@Base 0
  xcb_xkb_set_behavior_next@Base 0
  xcb_xkb_set_compat_map@Base 0
  xcb_xkb_set_compat_map_checked@Base 0
+ xcb_xkb_set_compat_map_group_maps@Base 1.12
+ xcb_xkb_set_compat_map_group_maps_iterator@Base 1.12
+ xcb_xkb_set_compat_map_group_maps_length@Base 1.12
+ xcb_xkb_set_compat_map_si@Base 1.12
+ xcb_xkb_set_compat_map_si_iterator@Base 1.12
+ xcb_xkb_set_compat_map_si_length@Base 1.12
  xcb_xkb_set_compat_map_sizeof@Base 0
  xcb_xkb_set_controls@Base 0
  xcb_xkb_set_controls_checked@Base 0
@@ -393,12 +389,20 @@ libxcb-xkb.so.1 libxcb-xkb1 #MINVER#
  xcb_xkb_set_debugging_flags_sizeof@Base 0
  xcb_xkb_set_debugging_flags_unchecked@Base 0
  xcb_xkb_set_device_info@Base 0
+ xcb_xkb_set_device_info_btn_actions@Base 1.12
+ xcb_xkb_set_device_info_btn_actions_iterator@Base 1.12
+ xcb_xkb_set_device_info_btn_actions_length@Base 1.12
  xcb_xkb_set_device_info_checked@Base 0
+ xcb_xkb_set_device_info_leds_iterator@Base 1.12
+ xcb_xkb_set_device_info_leds_length@Base 1.12
  xcb_xkb_set_device_info_sizeof@Base 0
  xcb_xkb_set_explicit_end@Base 0
  xcb_xkb_set_explicit_next@Base 0
  xcb_xkb_set_indicator_map@Base 0
  xcb_xkb_set_indicator_map_checked@Base 0
+ xcb_xkb_set_indicator_map_maps@Base 1.12
+ xcb_xkb_set_indicator_map_maps_iterator@Base 1.12
+ xcb_xkb_set_indicator_map_maps_length@Base 1.12
  xcb_xkb_set_indicator_map_sizeof@Base 0
  xcb_xkb_set_key_type_end@Base 0
  xcb_xkb_set_key_type_entries@Base 0
@@ -413,6 +417,8 @@ libxcb-xkb.so.1 libxcb-xkb1 #MINVER#
  xcb_xkb_set_map_aux@Base 0
  xcb_xkb_set_map_aux_checked@Base 0
  xcb_xkb_set_map_checked@Base 0
+ xcb_xkb_set_map_sizeof@Base 1.12
+ xcb_xkb_set_map_values@Base 1.12
  xcb_xkb_set_map_values_actions@Base 0
  xcb_xkb_set_map_values_actions_count@Base 0
  xcb_xkb_set_map_values_actions_count_end@Base 0
@@ -447,6 +453,8 @@ libxcb-xkb.so.1 libxcb-xkb1 #MINVER#
  xcb_xkb_set_names_aux@Base 0
  xcb_xkb_set_names_aux_checked@Base 0
  xcb_xkb_set_names_checked@Base 0
+ xcb_xkb_set_names_sizeof@Base 1.12
+ xcb_xkb_set_names_values@Base 1.12
  xcb_xkb_set_names_values_groups@Base 0
  xcb_xkb_set_names_values_groups_end@Base 0
  xcb_xkb_set_names_values_groups_length@Base 0

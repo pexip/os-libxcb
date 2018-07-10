@@ -11,6 +11,12 @@ libxcb-record.so.0 libxcb-record0 #MINVER#
  xcb_record_context_next@Base 0
  xcb_record_create_context@Base 0
  xcb_record_create_context_checked@Base 0
+ xcb_record_create_context_client_specs@Base 1.12
+ xcb_record_create_context_client_specs_end@Base 1.12
+ xcb_record_create_context_client_specs_length@Base 1.12
+ xcb_record_create_context_ranges@Base 1.12
+ xcb_record_create_context_ranges_iterator@Base 1.12
+ xcb_record_create_context_ranges_length@Base 1.12
  xcb_record_create_context_sizeof@Base 1.8
  xcb_record_disable_context@Base 0
  xcb_record_disable_context_checked@Base 0
@@ -45,7 +51,16 @@ libxcb-record.so.0 libxcb-record0 #MINVER#
  xcb_record_range_next@Base 0
  xcb_record_register_clients@Base 0
  xcb_record_register_clients_checked@Base 0
+ xcb_record_register_clients_client_specs@Base 1.12
+ xcb_record_register_clients_client_specs_end@Base 1.12
+ xcb_record_register_clients_client_specs_length@Base 1.12
+ xcb_record_register_clients_ranges@Base 1.12
+ xcb_record_register_clients_ranges_iterator@Base 1.12
+ xcb_record_register_clients_ranges_length@Base 1.12
  xcb_record_register_clients_sizeof@Base 1.8
  xcb_record_unregister_clients@Base 0
  xcb_record_unregister_clients_checked@Base 0
+ xcb_record_unregister_clients_client_specs@Base 1.12
+ xcb_record_unregister_clients_client_specs_end@Base 1.12
+ xcb_record_unregister_clients_client_specs_length@Base 1.12
  xcb_record_unregister_clients_sizeof@Base 1.8
