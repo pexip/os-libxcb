@@ -1,3 +1,57 @@
+libxcb (1.13.1-2) unstable; urgency=medium
+
+  * Add missing autopkgtest dependency on xauth.
+  * Set source format to 1.0.
+  * Bump standards version to 4.2.1.
+
+ -- Andreas Boll <aboll@debian.org>  Fri, 14 Dec 2018 11:28:13 +0100
+
+libxcb (1.13.1-1) unstable; urgency=medium
+
+  * New upstream release.
+    - fix KWin crashes on NVIDIA
+
+ -- Timo Aaltonen <tjaalton@debian.org>  Tue, 09 Oct 2018 11:45:36 +0300
+
+libxcb (1.13-3) unstable; urgency=medium
+
+  * Rebuild to get -dbgsym back. (Closes: #906934)
+
+ -- Timo Aaltonen <tjaalton@debian.org>  Wed, 22 Aug 2018 21:34:31 +0300
+
+libxcb (1.13-2) unstable; urgency=medium
+
+  [ Timo Aaltonen ]
+  * Package libxcb-xinput0/libxcb-xinput-dev. (Closes: #733227) (LP: #1777994)
+
+  [ Andreas Boll ]
+  * control: Fix VCS urls.
+
+ -- Timo Aaltonen <tjaalton@debian.org>  Thu, 21 Jun 2018 13:52:59 +0300
+
+libxcb (1.13-1) unstable; urgency=medium
+
+  [ Julien Cristau ]
+  * Switch xcb.freedesktop.org URLs in packaging to https.
+  * Stop building -dbg packages, rely on automatic dbgsym packages instead.
+
+  [ Helmut Grohne ]
+  * Make build-dependencies cross-satisfiable (closes: #788861)
+    + Mark python build-dependency with :native to pick an executable python
+    + Do not build-depend on check when the nocheck profile is passed
+
+  [ Timo Aaltonen ]
+  * New upstream release. (Closes: #892215)
+  * control: Bump xcb-proto build-dep to 1.13.
+  * tests: Add a simple autopkgtest.
+  * control: Update VCS urls.
+  * control, rules: Bump debhelper to 11, use max-parallel=1 for tests.
+  * Update symbols.
+  * rules: Update clean target.
+  * control: Bump policy to 4.1.3, no changes.
+
+ -- Timo Aaltonen <tjaalton@debian.org>  Wed, 07 Mar 2018 10:57:47 +0200
+
 libxcb (1.12-1pexip1) pexip; urgency=medium
 
   * Migrate to Stretch
