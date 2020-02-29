@@ -1,3 +1,9 @@
+libxcb (1.13.1-2pexip1) pexip; urgency=medium
+
+  * Migrate to Buster
+
+ -- Vincent Sanders <vince@pexip.com>  Sat, 29 Feb 2020 16:10:33 +0000
+
 libxcb (1.13.1-2) unstable; urgency=medium
 
   * Add missing autopkgtest dependency on xauth.
