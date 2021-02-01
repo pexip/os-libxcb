@@ -6,6 +6,12 @@
 
 set -e
 
+if [ -n "${DEB_HOST_GNU_TYPE:-}" ]; then
+    CROSS_COMPILE="$DEB_HOST_GNU_TYPE-"
+else
+    CROSS_COMPILE=
+fi
+
 WORKDIR=$(mktemp -d)
 trap "rm -rf $WORKDIR" 0 INT QUIT ABRT PIPE TERM
 cd $WORKDIR
@@ -27,7 +33,7 @@ int main(void)
 }
 EOF
 
-gcc -o libxcb_test libxcb_test.c `pkg-config --cflags --libs xcb` -Wall -Werror
+${CROSS_COMPILE}gcc -o libxcb_test libxcb_test.c `${CROSS_COMPILE}pkg-config --cflags --libs xcb` -Wall -Werror
 echo "build: OK"
 [ -x libxcb_test ]
 xvfb-run ./libxcb_test

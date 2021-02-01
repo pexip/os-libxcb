@@ -7,24 +7,24 @@ Uploaders:
 Build-Depends:
  libxau-dev (>= 1:1.0.5-2),
  libxdmcp-dev (>= 1:1.0.3-2),
- xcb-proto (>= 1.13),
+ xcb-proto (>= 1.14),
  xcb-proto (<< 2.0),
  libpthread-stubs0-dev (>= 0.1),
- debhelper (>= 11),
+ debhelper-compat (= 12),
  pkg-config,
  xutils-dev,
  xsltproc (>= 1.1.19),
  check (>= 0.9.4-2) <!nocheck>,
- python-xcbgen (>= 1.12),
+ python3-xcbgen (>= 1.14),
  libtool,
  automake,
- python:native,
+ python3:native,
  dctrl-tools
 Build-Depends-Indep:
 # libxcb-doc
  doxygen,
  graphviz,
-Standards-Version: 4.2.1
+Standards-Version: 4.5.0
 Homepage: https://xcb.freedesktop.org
 Vcs-Git: https://salsa.debian.org/xorg-team/lib/libxcb.git
 Vcs-Browser: https://salsa.debian.org/xorg-team/lib/libxcb
@@ -762,7 +762,10 @@ Package: libxcb-xinput-dev
 Section: libdevel
 Architecture: any
 Multi-Arch: same
-Depends: ${misc:Depends}, libxcb-xinput0 (= ${binary:Version}), libxcb1-dev
+Depends: ${misc:Depends},
+ libxcb-xinput0 (= ${binary:Version}),
+ libxcb1-dev,
+ libxcb-xfixes0-dev,
 Description: X C Binding, xinput extension, development files
  This package contains the header and library files needed to build software
  using libxcb-xinput, the xinput extension for the X C Binding.
