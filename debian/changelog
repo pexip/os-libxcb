@@ -1,3 +1,9 @@
+libxcb (1.14-3pexip1) pexip; urgency=medium
+
+  * Initial bullseye build
+
+ -- Mark Hymers <mark.hymers@pexip.com>  Thu, 02 Jun 2022 14:42:31 +0100
+
 libxcb (1.14-3) unstable; urgency=high
 
   * tests: don't use deprecated fail_unless check API (closes: #980602).
