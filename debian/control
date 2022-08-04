@@ -7,7 +7,7 @@ Uploaders:
 Build-Depends:
  libxau-dev (>= 1:1.0.5-2),
  libxdmcp-dev (>= 1:1.0.3-2),
- xcb-proto (>= 1.14),
+ xcb-proto (>= 1.15),
  xcb-proto (<< 2.0),
  libpthread-stubs0-dev (>= 0.1),
  debhelper-compat (= 12),
