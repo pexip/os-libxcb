@@ -29,7 +29,7 @@ Standards-Version: 4.5.0
 Homepage: https://xcb.freedesktop.org
 Vcs-Git: https://salsa.debian.org/xorg-team/lib/libxcb.git
 Vcs-Browser: https://salsa.debian.org/xorg-team/lib/libxcb
-XS-Pexip-Upstream: http://deb.debian.org/debian/ bullseye
+XS-Pexip-Upstream: http://deb.debian.org/debian/ bookworm
 
 Package: libxcb1
 Section: libs
