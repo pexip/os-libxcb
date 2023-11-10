@@ -1,3 +1,11 @@
+libxcb (1.15-1) unstable; urgency=medium
+
+  * New upstream release.
+  * control: Bump build-dependency on xcb-proto.
+  * symbols: Updated.
+
+ -- Timo Aaltonen <tjaalton@debian.org>  Thu, 04 Aug 2022 08:59:39 +0300
+
 libxcb (1.14-3pexip3) pexip-bullseye; urgency=medium
 
   * Bullseye rebuild for ARM64 inclusion
