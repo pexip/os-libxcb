@@ -1,3 +1,56 @@
+libxcb (1.17.0-2) unstable; urgency=medium
+
+  [ Aurélien COUDERC ]
+  * Add missing dependency from libxcb-present-dev on libxcb-dri3-dev.
+    (Closes: #1069408)
+
+  [ Helmut Grohne ]
+  * Reduce Build-Depends: (Closes: #981656)
+    + pthread-stubs are only required on non-linux architectures. Annotate
+      [!linux-any].
+    + xsltproc is only used for rendering test results. Annotate <!nocheck>.
+    + dctrl-tools is entirely unused. Drop it.
+  * Support the noudeb build profile. (Closes: #1024938)
+
+  [ Emilio Pozuelo Monfort ]
+  * Also annotate libpthread-stubs0-dev dependency for libxcb1-dev.
+  * Build-depend on pkgconf instead of pkg-config.
+
+ -- Emilio Pozuelo Monfort <pochu@debian.org>  Tue, 21 May 2024 10:46:46 +0200
+
+libxcb (1.17.0-1) unstable; urgency=medium
+
+  [ Debian Janitor ]
+  * Remove constraints unnecessary since buster (oldstable):
+    + Build-Depends: Drop versioned constraint on check, libpthread-stubs0-dev,
+      libxau-dev, libxdmcp-dev and xsltproc.
+    + libxcb1: Drop versioned constraint on alsa-utils in Breaks.
+    + libxcb1-dev: Drop versioned constraint on libxau-dev and libxdmcp-dev in
+      Depends.
+  * Trim trailing whitespace.
+  * Bump debhelper from old 12 to 13.
+    + debian/rules: Drop --fail-missing argument to dh_missing, which is now the
+      default.
+  * Update standards version to 4.6.1, no changes needed.
+  * Remove fields on binary packages that duplicate source.
+    + Field Priority from libxcb-doc.
+    + Field Section from libxcb-composite0-dev, libxcb-damage0-dev,
+      libxcb-dpms0-dev, libxcb-dri2-0-dev, libxcb-dri3-dev, libxcb-glx0-dev,
+      libxcb-present-dev, libxcb-randr0-dev, libxcb-record0-dev,
+      libxcb-render0-dev, libxcb-res0-dev, libxcb-screensaver0-dev,
+      libxcb-shape0-dev, libxcb-shm0-dev, libxcb-sync-dev, libxcb-xf86dri0-dev,
+      libxcb-xfixes0-dev, libxcb-xinerama0-dev, libxcb-xinput-dev,
+      libxcb-xkb-dev, libxcb-xtest0-dev, libxcb-xv0-dev, libxcb-xvmc0-dev,
+      libxcb1-dev.
+  * Update standards version to 4.6.2, no changes needed.
+
+  [ Timo Aaltonen ]
+  * New upstream release. (Closes: #1064702)
+  * rules: Disable dbe.
+  * symbols: Updated.
+
+ -- Timo Aaltonen <tjaalton@debian.org>  Fri, 19 Apr 2024 11:41:56 +0300
+
 libxcb (1.15-1) unstable; urgency=medium
 
   * New upstream release.

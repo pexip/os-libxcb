@@ -6,6 +6,7 @@
 override_dh_auto_configure:
 	dh_auto_configure -- \
 		PYTHON=python3 \
+		--enable-dbe=no \
 		--disable-silent-rules
 
 override_dh_auto_test:
@@ -17,6 +18,7 @@ override_dh_makeshlibs:
 
 override_dh_install:
 	find debian/tmp -name '*.la' -delete
+	rm -f debian/tmp/usr/include/xcb/dbe.h
 	rm -f debian/tmp/usr/include/xcb/ge.h
 	rm -f debian/tmp/usr/include/xcb/xevie.h
 	rm -f debian/tmp/usr/include/xcb/xprint.h
@@ -26,9 +28,6 @@ override_dh_install:
 override_dh_installdocs: debian/copyright.debian COPYING
 	cat $+ > debian/copyright
 	dh_installdocs
-
-override_dh_missing:
-	dh_missing --fail-missing
 
 override_dh_compress:
 	dh_compress -X.png -X.html -X.map -X.css
