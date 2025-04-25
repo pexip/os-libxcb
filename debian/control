@@ -6,26 +6,25 @@ XSBC-Pexip-Original-Maintainer: Debian X Strike Force <debian-x@lists.debian.org
 XSBC-Pexip-Original-Uploaders:
  Julien Cristau <jcristau@debian.org>,
 Build-Depends:
- libxau-dev (>= 1:1.0.5-2),
- libxdmcp-dev (>= 1:1.0.3-2),
+ libxau-dev,
+ libxdmcp-dev,
  xcb-proto (>= 1.15),
  xcb-proto (<< 2.0),
- libpthread-stubs0-dev (>= 0.1),
- debhelper-compat (= 12),
- pkg-config,
+ libpthread-stubs0-dev [!linux-any],
+ debhelper-compat (= 13),
+ pkgconf,
  xutils-dev,
- xsltproc (>= 1.1.19),
- check (>= 0.9.4-2) <!nocheck>,
+ xsltproc <!nocheck>,
+ check <!nocheck>,
  python3-xcbgen (>= 1.14),
  libtool,
  automake,
  python3:native,
- dctrl-tools
 Build-Depends-Indep:
 # libxcb-doc
  doxygen,
  graphviz,
-Standards-Version: 4.5.0
+Standards-Version: 4.6.2
 Homepage: https://xcb.freedesktop.org
 Vcs-Git: https://salsa.debian.org/xorg-team/lib/libxcb.git
 Vcs-Browser: https://salsa.debian.org/xorg-team/lib/libxcb
@@ -35,8 +34,6 @@ Package: libxcb1
 Section: libs
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
-Breaks:
- alsa-utils (<< 1.0.24.2-5),
 Pre-Depends: ${misc:Pre-Depends}
 Multi-Arch: same
 Description: X C Binding
@@ -56,6 +53,7 @@ Description: X C Binding
 
 Package: libxcb1-udeb
 Package-Type: udeb
+Build-Profiles: <!noudeb>
 Section: debian-installer
 Architecture: any
 Depends: ${misc:Depends}, ${shlibs:Depends}
@@ -63,10 +61,9 @@ Description: X C Binding
  This is a udeb, or a microdeb, for the debian-installer.
 
 Package: libxcb1-dev
-Section: libdevel
 Architecture: any
 Multi-Arch: same
-Depends: ${misc:Depends}, libxcb1 (= ${binary:Version}), libpthread-stubs0-dev, libxau-dev (>= 1:1.0.0-1), libxdmcp-dev (>= 1:1.0.0-1)
+Depends: ${misc:Depends}, libxcb1 (= ${binary:Version}), libpthread-stubs0-dev [!linux-any], libxau-dev, libxdmcp-dev
 Suggests: libxcb-doc
 Description: X C Binding, development files
  This package contains the header and library files needed to build software
@@ -85,7 +82,6 @@ Description: X C Binding, development files
 
 Package: libxcb-doc
 Section: doc
-Priority: optional
 Multi-Arch: foreign
 Architecture: all
 Depends: ${misc:Depends}
@@ -126,7 +122,6 @@ Description: X C Binding, composite extension
     machine-parsable protocol descriptions
 
 Package: libxcb-composite0-dev
-Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends:
@@ -171,7 +166,6 @@ Description: X C Binding, damage extension
     machine-parsable protocol descriptions
 
 Package: libxcb-damage0-dev
-Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends:
@@ -216,7 +210,6 @@ Description: X C Binding, dpms extension
     machine-parsable protocol descriptions
 
 Package: libxcb-dpms0-dev
-Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends: ${misc:Depends}, libxcb-dpms0 (= ${binary:Version}), libxcb1-dev
@@ -257,7 +250,6 @@ Description: X C Binding, glx extension
     machine-parsable protocol descriptions
 
 Package: libxcb-glx0-dev
-Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends: ${misc:Depends}, libxcb-glx0 (= ${binary:Version}), libxcb1-dev
@@ -298,7 +290,6 @@ Description: X C Binding, randr extension
     machine-parsable protocol descriptions
 
 Package: libxcb-randr0-dev
-Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends:
@@ -343,7 +334,6 @@ Description: X C Binding, record extension
     machine-parsable protocol descriptions
 
 Package: libxcb-record0-dev
-Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends: ${misc:Depends}, libxcb-record0 (= ${binary:Version}), libxcb1-dev
@@ -384,7 +374,6 @@ Description: X C Binding, render extension
     machine-parsable protocol descriptions
 
 Package: libxcb-render0-dev
-Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends: ${misc:Depends}, libxcb-render0 (= ${binary:Version}), libxcb1-dev
@@ -425,7 +414,6 @@ Description: X C Binding, res extension
     machine-parsable protocol descriptions
 
 Package: libxcb-res0-dev
-Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends: ${misc:Depends}, libxcb-res0 (= ${binary:Version}), libxcb1-dev
@@ -466,7 +454,6 @@ Description: X C Binding, screensaver extension
     machine-parsable protocol descriptions
 
 Package: libxcb-screensaver0-dev
-Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends: ${misc:Depends}, libxcb-screensaver0 (= ${binary:Version}), libxcb1-dev
@@ -507,7 +494,6 @@ Description: X C Binding, shape extension
     machine-parsable protocol descriptions
 
 Package: libxcb-shape0-dev
-Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends: ${misc:Depends}, libxcb-shape0 (= ${binary:Version}), libxcb1-dev
@@ -548,7 +534,6 @@ Description: X C Binding, shm extension
     machine-parsable protocol descriptions
 
 Package: libxcb-shm0-dev
-Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends: ${misc:Depends}, libxcb-shm0 (= ${binary:Version}), libxcb1-dev
@@ -589,7 +574,6 @@ Description: X C Binding, sync extension
     machine-parsable protocol descriptions
 
 Package: libxcb-sync-dev
-Section: libdevel
 Architecture: any
 Multi-Arch: same
 Provides: libxcb-sync0-dev
@@ -633,7 +617,6 @@ Description: X C Binding, xf86dri extension
     machine-parsable protocol descriptions
 
 Package: libxcb-xf86dri0-dev
-Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends: ${misc:Depends}, libxcb-xf86dri0 (= ${binary:Version}), libxcb1-dev
@@ -674,7 +657,6 @@ Description: X C Binding, xfixes extension
     machine-parsable protocol descriptions
 
 Package: libxcb-xfixes0-dev
-Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends:
@@ -720,7 +702,6 @@ Description: X C Binding, xinerama extension
     machine-parsable protocol descriptions
 
 Package: libxcb-xinerama0-dev
-Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends: ${misc:Depends}, libxcb-xinerama0 (= ${binary:Version}), libxcb1-dev
@@ -761,7 +742,6 @@ Description: X C Binding, xinput extension
     machine-parsable protocol descriptions
 
 Package: libxcb-xinput-dev
-Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends: ${misc:Depends},
@@ -805,7 +785,6 @@ Description: X C Binding, xtest extension
     machine-parsable protocol descriptions
 
 Package: libxcb-xtest0-dev
-Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends: ${misc:Depends}, libxcb-xtest0 (= ${binary:Version}), libxcb1-dev
@@ -846,7 +825,6 @@ Description: X C Binding, xv extension
     machine-parsable protocol descriptions
 
 Package: libxcb-xv0-dev
-Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends:
@@ -891,7 +869,6 @@ Description: X C Binding, xvmc extension
     machine-parsable protocol descriptions
 
 Package: libxcb-xvmc0-dev
-Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends:
@@ -936,7 +913,6 @@ Description: X C Binding, dri2 extension
     machine-parsable protocol descriptions
 
 Package: libxcb-dri2-0-dev
-Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends: ${misc:Depends}, libxcb-dri2-0 (= ${binary:Version}), libxcb1-dev
@@ -977,7 +953,6 @@ Description: X C Binding, present extension
     machine-parsable protocol descriptions
 
 Package: libxcb-present-dev
-Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends:
@@ -987,6 +962,7 @@ Depends:
  libxcb-randr0-dev,
  libxcb-xfixes0-dev,
  libxcb-sync-dev,
+ libxcb-dri3-dev,
 Description: X C Binding, present extension, development files
  This package contains the header and library files needed to build software
  using libxcb-present, the present extension for the X C Binding.
@@ -1024,7 +1000,6 @@ Description: X C Binding, dri3 extension
     machine-parsable protocol descriptions
 
 Package: libxcb-dri3-dev
-Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends: ${misc:Depends}, libxcb-dri3-0 (= ${binary:Version}), libxcb1-dev
@@ -1065,7 +1040,6 @@ Description: X C Binding, XKEYBOARD extension
     machine-parsable protocol descriptions
 
 Package: libxcb-xkb-dev
-Section: libdevel
 Architecture: any
 Multi-Arch: same
 Depends: ${misc:Depends}, libxcb-xkb1 (= ${binary:Version}), libxcb1-dev
@@ -1083,4 +1057,3 @@ Description: X C Binding, XKEYBOARD extension, development files
   * Thread support: access XCB from multiple threads, with no explicit locking
   * Easy creation of new extensions: automatically generates interface from
     machine-parsable protocol descriptions
-
